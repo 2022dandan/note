@@ -1,5 +1,8 @@
 
 
 module.exports = {
-    lintOnSave: false
+    lintOnSave: false,
+    devServer: {
+        inline: true
+    }
 }

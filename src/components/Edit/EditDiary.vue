@@ -139,7 +139,7 @@ export default {
   .el-main {
     background-color: #F6F6F6;
     color: #333;
-    text-align: center;
+    /* text-align: center; */
     /* height: 100vh; */
   }
   .editToll{

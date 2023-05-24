@@ -1,15 +1,15 @@
 <template>
     <el-container>
-        <el-aside width="60px">
-            <Aside @getModel="attendModel" :username="username"></Aside><!-- 父子间组件通信 -->
+        <el-aside width="auto">
+            <Aside @getModel="attendModel" :update="updateAvatar"></Aside><!-- 父子间组件通信 -->
         </el-aside>
-        <el-main style="padding: 0 20px;">
+        <el-main style="padding: 0 20px; background: rgba(0, 0, 0, .02);">
             <Note v-if="model === 1"></Note>
             <Calendar v-if="model === 2"></Calendar>
             <Diary v-if="model === 3"></Diary>
             <Collect :username="username" v-if="model === 4"></Collect>
             <Theme v-if="model === 5"></Theme>
-            <PersonCenter v-if="model === 6" :username="username"></PersonCenter>
+            <PersonCenter v-if="model === 6" @udpateInfo="udpateInfo"></PersonCenter>
         </el-main>
     </el-container>
 </template>
@@ -33,6 +33,7 @@
                 model: 1,
                 username: '',
                 userId:'',
+                updateAvatar: ''
             }
         },
         mounted() {
@@ -44,6 +45,9 @@
             attendModel(a){
                 this.model = a;
             },
+            udpateInfo(avatar) {
+                this.updateAvatar = avatar
+            }
             
         }
     }

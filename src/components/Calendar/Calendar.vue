@@ -1,37 +1,42 @@
 <template>
-  <div>
+  <div style="height: 100%;">
     <!-- 页面构建 -->
-    <el-row class="calendar" type="flex" justify="center">
+    <el-row class="calendar" type="flex" justify="center" style="height: 100%; overflow: hidden; padding: 40px 0; box-sizing: border-box;" >
         <!-- 主题栏 -->
         <el-col :span="6">
             <div class="leftContent">
                 <div class="title">
-                    <i class="el-icon-s-home" style="line-height: 60px;"></i>
+                    <!-- <i class="el-icon-s-home" style="line-height: 60px;"></i> -->
                     <h2 style="text-align:center; line-height: 60px; margin: 0;">我的日历记事本</h2>
-                    <i class="el-icon-circle-plus-outline" style="line-height: 60px;" @click="dialogFormVisible = true"></i>
+                    <i class="el-icon-plus" style="color: crimson;" @click="dialogFormVisible = true"></i>
                 </div>
                 <span class="day">{{selectedDay}}</span>
                 <div>
                     <div class="block">
-                      <el-timeline>
+                      <el-timeline v-if="showList[showDay.toLocaleDateString()]?.length">
                         <el-timeline-item v-for="(form) in showList[showDay.toLocaleDateString()]" :timestamp="(new Date(form.time).toTimeString().slice(0, 8))" placement="top" :key="form.updatedAt">
-                          <el-card body-style="padding: 10px; font-size: 12px;display: flex;">
-                            <div style="width: 200px;font-size: 14px;" @click="lookThing(form)">
-                              <div><span>主题：{{form.name}}</span></div>
-                              <div><span>地点：{{form.address}}</span></div> 
+                          <el-card body-style="padding: 10px; font-size: 12px; display: flex; justify-content: space-around;">
+                            <div style="width: 200px;font-size: 14px; display: flex;" @click="lookThing(form)">
+                              <el-checkbox @change="handleChangeStastus(form)" @click.native="(e) => e.stopPropagation()" v-model="form.hasDone" style="margin-right: 10px;"/>
+                              <span style="max-width: 140px; display: inline-block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{form.name}}</span>
+                              <el-tag size="mini" :color="degreeColor[form.degree-1].color" effect="dark" style="border-color: transparent; margin-left: 5px;">{{ state[form.degree-1] }}</el-tag>
+                              <!-- <div><span>地点：{{form.address}}</span></div>  -->
                             </div>
-                            <div style="font-size: 24px;">
-                              <i class="el-icon-edit" @click="editedThing(form)"></i>
+                            <div class="edit">
+                              <span><i class="el-icon-edit" @click="editedThing(form)"></i></span>
                               <el-popconfirm
                                 title="确定要删除吗？"
                                 @confirm="deleteThing(form.id)"
+                                style="margin-left: 10px;"
                               >
-                                <i class="el-icon-delete" slot="reference" style="margin-left: 20px;"></i>
+                                <i class="el-icon-delete" slot="reference"></i>
                               </el-popconfirm>
                             </div>
                           </el-card>
                         </el-timeline-item>
                       </el-timeline>
+                      <el-empty description="暂无事件" v-else>
+                      </el-empty>
                     </div>
                 </div>
             </div>
@@ -41,7 +46,7 @@
         </el-col>
         <!-- 日历展示 -->
         <el-col :span="15">
-            <div id="calendar">
+            <div id="calendar" style="height: 100%; position: relative;">
                 <el-calendar v-model="showDay">
                     <template
                         slot="dateCell"
@@ -51,10 +56,16 @@
                             {{ date.getDate() }}
                         </p>
                         <div class="items">
-                          <span v-for="(item) in showList[date.toLocaleDateString()]" :key="item.day + item.time" class="item" :style="`backgroundColor: ${item.backgroundColor}`" @click="lookThing(item)"> {{ item.name }} </span>
+                          <span v-for="(item, i) in showList[date.toLocaleDateString()]" :key="item.time + i" class="item" :style="`backgroundColor: ${degreeColor[item.degree-1].color}`" @click="lookThing(item)"> {{ item.name }} </span>
                         </div>
                     </template>
                 </el-calendar>
+                <div style="left: 160px; display: inline-block; position: absolute; top: 28px;">
+                  <span v-for="(item, i) in degreeColor" :key="item.color" style="display: inline-flex; align-items: center; font-size: 14px; margin-right: 20px; cursor: pointer;" @click="handleColorSelect(item, i)">
+                    <span :style="`display: inline-block; width: 28px; height: 14px; border-radius: 3px; margin-right: 5px;background-color: ${item.show ? item.color : '#ccc'};`" />
+                    {{ state[i] }}
+                  </span>
+                </div>
             </div>
         </el-col>   
     </el-row>
@@ -183,7 +194,8 @@ import { request } from '../../utils'
             user_name: sessionStorage.getItem('username')
           },
           formLabelWidth: '120px',
-          state:['普通','一般','紧急'],
+          state: ['普通','一般','紧急'],
+          degreeColor: [{color: '#67C23A', show: true},{color: '#F09819', show: true}, {color: '#FF4B2B', show: true}],
           // 当前展示的日期
           showDay: new Date,
           viewThing:{},
@@ -220,6 +232,28 @@ import { request } from '../../utils'
               }, {})
               console.log('list', this.showList)
             })
+        },
+        // 点击颜色后执行
+        handleColorSelect(item, i) {
+          item.show = !item.show
+          this.showList = this.calendarList.reduce((obj, current) => {
+            // 如果show为false则跳过不添加
+            if (!this.degreeColor[current.degree-1].show) {
+              return obj
+            }
+
+            const day = new Date(current.time).toLocaleDateString()
+            let temp = obj[day]
+            if (!temp) {
+              obj[day] = []
+              temp = obj[day]
+            }
+            if (temp.length >= 3) {
+              return obj
+            }   
+            temp.push(current)
+            return obj
+          }, {})
         },
         async getCalendarList() {
           const res = await request('http://localhost:8000/cale/allCale', 'post', { user_name: this.addForm.user_name})
@@ -285,21 +319,37 @@ import { request } from '../../utils'
           const res = await request('http://localhost:8000/cale/deleteCale', 'post', { id: id})
           this.initData()
           return res.result
+        },
+        async handleChangeStastus(form) {
+          request('http://localhost:8000/cale/reviceCale', 'post', form)
+          this.initData()
         }
       },
     }
 </script>
 <style >
     .calendar .leftContent {
-      height: calc(100% - 25px);;
-      border: #1989FA 1px solid;
-      margin-top: 25px;
-      border-radius: 20px;
+      /* height: calc(100% - 25px);;
+      margin-top: 25px; */
+      height: 100%;
+      border-radius: 10px;
+      border: 2px solid #ddd;
+      background-color: #fff;
     }
     .calendar .title {
-        display: flex;
-        justify-content: center;
-        height: 60px;
+      display: flex;
+      position: relative;
+      justify-content: space-around;
+      height: 60px;
+    }
+
+    .calendar .title i {
+      position: absolute;
+      right: 22px;
+      line-height: 60px;
+      font-size: 20px;
+      font-weight: bolder;
+      cursor: pointer;
     }
 
     .calendar .day {
@@ -312,26 +362,50 @@ import { request } from '../../utils'
       padding-right: 40px;
       margin-top: 20px;
     }
+
+    .calendar .el-timeline .edit {
+      display: flex;
+      font-size: 15px;
+      color: rgba(0,0,0,.7);
+    }
+
+    .calendar .el-timeline .edit span {
+      cursor: pointer;
+    }
+
+    .calendar .el-timeline .edit span:hover {
+      color: #000;
+    }
   
     .calendar .is-selected {
       color: #1989FA;
     }
     .calendar .el-calendar{
       margin: 0 auto;
-      margin-top: 25px;
-      width: 800px;
-      border: #1989FA 1px solid;
-      border-radius: 20px;
+      border-radius: 10px;
+      border: 2px solid #ddd;
+      background-color: #fff;
+      box-sizing: border-box;
+      padding: 10px 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
     }
     .calendar .el-calendar__body {
       /* height: 400px; */
-      width: 700px;
-      margin: 0 0 5px 30px;
+      /* margin: 0 0 5px 30px; */
+      flex: 1;
       padding-bottom: 0;
     }
+
+    .calendar td:hover {
+      cursor: pointer;
+      background-color: #F2F8FE;
+    }
+    
     .calendar .el-calendar-day {
-      height: auto !important;
-      min-height: 70px;
+      height: 100%;
+      max-height: 45px;
     }
     .calendar p {
       position: relative;
@@ -345,6 +419,7 @@ import { request } from '../../utils'
       align-content: center;
     }
     .calendar .items .item {
+      zoom: .9;
       box-sizing: border-box;
       border-radius: 3px;
       margin-bottom: 1px;
@@ -358,6 +433,10 @@ import { request } from '../../utils'
     }
     .calendar .hasDone {
       position: absolute;
+    }
+
+    .el-calendar-table {
+      height: 100%;
     }
   
 </style>
