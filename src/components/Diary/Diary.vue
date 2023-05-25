@@ -24,8 +24,8 @@
           </div>
           <div style="flex: 1; overflow: hidden; padding: 10px 0;">
             <div v-if="layout === 'card'" style="display: flex; flex-direction: column; align-items: center; width: 100%; height: 100%; overflow: auto; padding-right: 30px; padding-left: 10px; padding-bottom: 20px;">
-              <div v-for="(form) in diary" :key="form.date" style="margin-top: 20px; width: 100%; cursor: pointer;" @click="handleClickCard(form)" @dblclick="handleClickCardDouble">
-                <DiaryCardShow :diaryForm="form" @handleEdit="handleClickCardDouble" @getAllDiary="getAllDiary"></DiaryCardShow>
+              <div v-for="(form) in diary" :key="form.date" style="margin-top: 20px; width: 100%; cursor: pointer;" @click="handleClickCard(form)" @dblclick="handleEdit">
+                <DiaryCardShow :diaryForm="form" @handleEdit="handleEdit" @getAllDiary="getAllDiary"></DiaryCardShow>
               </div>
             </div>
             <div v-else style="display: flex; flex-direction: column; align-items: center; width: 100%; height: 100%; overflow: auto; padding-right: 30px; padding-left: 10px; padding-bottom: 20px; margin-top: 20px;">
@@ -40,10 +40,10 @@
       <!-- 日历展示 -->
       <el-col :span="15">
         <div style="height: 100%; border-radius: 10px; border: 2px solid #ddd; background-color: #fff; overflow: hidden;">
-          <div v-if="!editting" style="height: calc(100vh - 88px); overflow-y: auto; padding: 0 20px;" @dblclick="handleClickCardDouble">
+          <div v-if="!editting" style="height: calc(100vh - 88px); overflow-y: auto; padding: 0 20px;" @dblclick="handleEdit">
             <Viewer v-if="markdown" :value="markdown" />
             <el-empty v-else description="该日记还未写内容哦，点击下方按钮开始编写">
-              <el-button type="primary">Start</el-button>
+              <el-button type="primary" @click="handleEdit">Start</el-button>
             </el-empty>
           </div>
           <div v-else style="height: calc(100vh - 80px); overflow-y: auto;">
@@ -193,17 +193,18 @@
           return bTime - aTime
 
         })
-        this.markdown = this.diary[0].content
+        this.markdown = this.diary[0].content || ''
         console.log('tree', this.diaryTreeList)
       },
       handleChange(v) {
         this.markdown = v
       },
       handleClickCard(form) {
+        console.log(form)
         this.markdown = form.content
         this.editting = false
       },
-      handleClickCardDouble() {
+      handleEdit() {
         this.editting = true
       },
       handleNodeClick(data) {
