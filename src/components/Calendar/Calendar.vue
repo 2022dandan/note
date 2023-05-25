@@ -46,28 +46,28 @@
         </el-col>
         <!-- 日历展示 -->
         <el-col :span="15">
-            <div id="calendar" style="height: 100%; position: relative;">
-                <el-calendar v-model="showDay">
-                    <template
-                        slot="dateCell"
-                        slot-scope="{data, date}"
-                    > 
-                        <p :class="data.isSelected ? 'is-selected' : ''" @click="updateDay(date)">
-                            {{ date.getDate() }}
-                        </p>
-                        <div class="items">
-                          <span v-for="(item, i) in showList[date.toLocaleDateString()]" :key="item.time + i" class="item" :style="`backgroundColor: ${degreeColor[item.degree-1].color}`" @click="lookThing(item)"> {{ item.name }} </span>
-                        </div>
-                    </template>
-                </el-calendar>
-                <div style="left: 160px; display: inline-block; position: absolute; top: 28px;">
-                  <span v-for="(item, i) in degreeColor" :key="item.color" style="display: inline-flex; align-items: center; font-size: 14px; margin-right: 20px; cursor: pointer;" @click="handleColorSelect(item, i)">
-                    <span :style="`display: inline-block; width: 28px; height: 14px; border-radius: 3px; margin-right: 5px;background-color: ${item.show ? item.color : '#ccc'};`" />
-                    {{ state[i] }}
-                  </span>
-                </div>
-            </div>
-        </el-col>   
+          <div id="calendar" style="height: 100%; position: relative;">
+              <el-calendar v-model="showDay">
+                  <template
+                      slot="dateCell"
+                      slot-scope="{data, date}"
+                  > 
+                      <p :class="data.isSelected ? 'is-selected' : ''" @click="updateDay(date)">
+                          {{ date.getDate() }}
+                      </p>
+                      <div class="items">
+                        <span v-for="(item, i) in showList[date.toLocaleDateString()]" :key="item.time + i" class="item" :style="`backgroundColor: ${degreeColor[item.degree-1].color}`" @click="lookThing(item)"> {{ item.name }} </span>
+                      </div>
+                  </template>
+              </el-calendar>
+              <div style="left: 160px; display: inline-block; position: absolute; top: 28px;">
+                <span v-for="(item, i) in degreeColor" :key="item.color" style="display: inline-flex; align-items: center; font-size: 14px; margin-right: 20px; cursor: pointer;" @click="handleColorSelect(item, i)">
+                  <span :style="`display: inline-block; width: 28px; height: 14px; border-radius: 3px; margin-right: 5px;background-color: ${item.show ? item.color : '#ccc'};`" />
+                  {{ state[i] }}
+                </span>
+              </div>
+          </div>
+        </el-col>
     </el-row>
     <!-- 添加弹窗 -->
     <el-dialog title="添加事件" :visible.sync="dialogFormVisible">

@@ -1,17 +1,37 @@
 <template>
-  <div>
-    <el-row class="diary" type="flex" justify="center">
+  <div style="height: 100%;">
+    <el-row class="diary" type="flex" justify="center" style="height: 100%; overflow: hidden; padding: 40px 0; box-sizing: border-box; user-select: none;">
       <!-- 界面主题展示 -->
       <el-col :span="6">
-        <div class="title">
-          <h2 style="text-align:center">我的日记本</h2>
-          <div style="display: flex;">
-            <el-button round style="margin-left: 30px;" @click="dialogFormVisible = true">添加日记</el-button>
-            <Search style="width: 150px; margin-left: 15px;"></Search>
+        <div class="leftContent">
+          <div class="title">
+            <h2 style="text-align:center">我的日记本</h2>
+            <el-tooltip class="item" effect="light" content="表格布局" placement="right">
+              <i @click="changeLayout" :class="{'el-icon-menu': true, active: layout === 'card'}"></i>
+            </el-tooltip>
           </div>
-          <el-col :span="22" v-for="(form) in diary" :key="form.date"  style="margin-top: 20px;">
-            <DiaryCardShow :diaryForm="form" style="margin-left: 30px;" @getAllDiary="getAllDiary"> </DiaryCardShow>
-          </el-col>
+          <div style="display: flex; padding-left: 10px; padding-right: 6px;">
+            <div class="search" style="flex: 1; background-color: #f2f3f5;border-radius: 2px; overflow: hidden;">
+              <el-input
+                placeholder="搜索日记"
+                suffix-icon="el-icon-search"
+                size="mini"
+                v-model="search"
+              >
+              </el-input>
+            </div>
+            <el-button style="margin-left: 5px; padding: 0 5px;" @click="dialogFormVisible = true">写日记</el-button>
+          </div>
+          <div style="flex: 1; overflow: hidden; padding: 10px 0;">
+            <div v-if="layout === 'card'" style="display: flex; flex-direction: column; align-items: center; width: 100%; height: 100%; overflow: auto; padding-right: 30px; padding-left: 10px; padding-bottom: 20px;">
+              <div v-for="(form) in diary" :key="form.date" style="margin-top: 20px; width: 100%; cursor: pointer;" @click="handleClickCard(form)" @dblclick="handleClickCardDouble">
+                <DiaryCardShow :diaryForm="form" @handleEdit="handleClickCardDouble" @getAllDiary="getAllDiary"></DiaryCardShow>
+              </div>
+            </div>
+            <div v-else style="display: flex; flex-direction: column; align-items: center; width: 100%; height: 100%; overflow: auto; padding-right: 30px; padding-left: 10px; padding-bottom: 20px; margin-top: 20px;">
+              <el-tree style="width: 100%;" default-expand-all node-key="id" highlight-current :current-node-key="defaultCheckedKeys" :data="diaryTreeList" @node-click="handleNodeClick"></el-tree>
+            </div>
+          </div>
         </div>
       </el-col>
       <!-- 中间间隔 -->
@@ -19,17 +39,16 @@
       </el-col>
       <!-- 日历展示 -->
       <el-col :span="15">
-        <div id="calendar">
-          <el-calendar>
-            <template
-              slot="dateCell"
-              slot-scope="{data, date}"> 
-              <p :class="data.isSelected ? 'is-selected' : ''">
-                {{ data.day.split('-').slice(1).join('-') }} 
-                <span v-if="judge(date)" class="hasDone">✔️</span>
-              </p>
-            </template>
-          </el-calendar>
+        <div style="height: 100%; border-radius: 10px; border: 2px solid #ddd; background-color: #fff; overflow: hidden;">
+          <div v-if="!editting" style="height: calc(100vh - 88px); overflow-y: auto; padding: 0 20px;" @dblclick="handleClickCardDouble">
+            <Viewer v-if="markdown" :value="markdown" />
+            <el-empty v-else description="该日记还未写内容哦，点击下方按钮开始编写">
+              <el-button type="primary">Start</el-button>
+            </el-empty>
+          </div>
+          <div v-else style="height: calc(100vh - 80px); overflow-y: auto;">
+            <Editor style="height: 100%;" :value="markdown" :plugins="plugins" @change="handleChange" />
+          </div>
         </div>
       </el-col>
     </el-row>
@@ -63,42 +82,79 @@
   </div>
 </template>
 <script>
+  import { Editor, Viewer } from '@bytemd/vue'
   import Search from '../Search.vue'
   import DiaryCardShow from './DiaryCardShow.vue'
   import { request } from '../../utils'
+  import 'juejin-markdown-themes/dist/channing-cyan.min.css'
+  import 'bytemd/dist/index.css'
+
+
   export default {
     name:'Diary',
-    components:{Search,DiaryCardShow},
+    components:{Search, DiaryCardShow, Editor, Viewer},
     data() {
       return {
         has: [],
         diary:[
-          // {
-          //   time:'2023-5-13',
-          //   name:'游乐场',
-          //   feel:'开心',
-          //   weather:'天晴',
-          // },
-          // {
-          //   time:'2023-5-10',
-          //   name:'看电影',
-          //   feel:'兴奋',
-          //   weather:'阴天',
-          // },
-          // {
-          //   time:'2023-5-04',
-          //   name:'写作业',
-          //   feel:'正常',
-          //   weather:'阴天',
-          // }
         ],
+        // 搜索
+        search: '',
         // 日记添加
         dialogTableVisible: false,
         dialogFormVisible: false,
         form: {
           user_name: sessionStorage.getItem('username')
         },
-        formLabelWidth: '120px'
+        formLabelWidth: '120px',
+
+        // markdown预览
+        markdown: '',
+        plugins: [],
+        editting: false,
+
+        // 布局模式
+        layout: 'tree'
+
+      }
+    },
+    computed: {
+      diaryTreeList() {
+        const res = []
+        const obj = {}
+        this.diary.forEach(item => {
+          const time = new Date(item.time)
+          const year = time.getFullYear()
+          const month = time.getMonth() + 1
+          const day = time.getDate()
+          if (!obj[year]) {
+            obj[year] = {}
+          }
+          if (!obj[year][month]) {
+            obj[year][month] = {}
+          }
+          obj[year][month][day] = item
+        })
+        Object.keys(obj).forEach(year => {
+          res.push({
+            id: year,
+            label: year + '年',
+            children: Object.keys(obj[year]).map(month => ({
+              id: `${year}/${month}`,
+              label: month + '月',
+              children: Object.keys(obj[year][month]).map(day => ({
+                id: `${year}/${month}/${day}`,
+                label: day + '日',
+                data: obj[year][month][day],
+                isLeaf: true
+              }))
+            }))
+          })
+        })
+        return res
+      },
+      defaultCheckedKeys() {
+        return new Date().toLocaleDateString()
       }
     },
     mounted(){
@@ -129,22 +185,83 @@
           item.date = new Date(item.time).toLocaleDateString().replace(/\//g, '-')
           this.has.push(item.date)
         })
-        console.log(this.has, 123)
+
+        // 按时间排序
+        this.diary.sort((a, b) => {
+          const aTime = new Date(a.time).getTime()
+          const bTime = new Date(b.time).getTime()
+          return bTime - aTime
+
+        })
+        this.markdown = this.diary[0].content
+        console.log('tree', this.diaryTreeList)
+      },
+      handleChange(v) {
+        this.markdown = v
+      },
+      handleClickCard(form) {
+        this.markdown = form.content
+        this.editting = false
+      },
+      handleClickCardDouble() {
+        this.editting = true
+      },
+      handleNodeClick(data) {
+        console.log(data)
+        if (data.isLeaf) {
+          this.markdown = data.data.content
+          this.editting = false
+        }
+      },
+      changeLayout() {
+        this.layout = this.layout === 'card' ? 'tree' : 'card' 
       }
     },
   }
 </script>
 <style>
-  .diary .title {
-    height: calc(100% - 25px);;
-    border: #1989FA 1px solid;
-    margin-top: 25px;
-    border-radius: 20px;
+
+  .diary .leftContent {
+    /* height: calc(100% - 25px);;
+    margin-top: 25px; */
+    height: 100%;
+    border-radius: 10px;
+    border: 2px solid #ddd;
+    background-color: #fff;
+    padding: 0 25px;
+    display: flex;
+    flex-direction: column;
   }
 
-  .diary .is-selected {
+  .diary .search .el-input__inner {
+    background-color: transparent;
+    border: 0;
+    border-radius: 5px;
+  }
+
+  .diary .title {
+    display: flex;
+    position: relative;
+    justify-content: space-around;
+    align-items: center;
+    height: 60px;
+  }
+
+  .diary .title i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    font-size: 20px;
+    transform: translateY(-50%);
+    color: #ccc;
+    cursor: pointer;
+  }
+
+  .diary .title i:hover,
+  .diary .title i.active {
     color: #1989FA;
   }
+
   .diary .el-calendar{
     margin: 0 auto;
     margin-top: 25px;
@@ -170,6 +287,19 @@
   }
   .diary .hasDone {
     position: absolute;
+  }
+
+  .bytemd {
+    height: 100%;
+    border: 0;
+  }
+
+  .bytemd-toolbar {
+    border: 0;
+  }
+
+  .bytemd .markdown-body h1 {
+    max-width: 100%;
   }
 
 </style>
