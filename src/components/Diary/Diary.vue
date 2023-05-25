@@ -42,12 +42,12 @@
         <div style="height: 100%; border-radius: 10px; border: 2px solid #ddd; background-color: #fff; overflow: hidden;">
           <div v-if="!editting" style="height: calc(100vh - 88px); overflow-y: auto; padding: 0 20px;" @dblclick="handleEdit">
             <Viewer v-if="markdown" :value="markdown" />
-            <el-empty v-else description="该日记还未写内容哦，点击下方按钮开始编写">
+            <el-empty v-else description="该日记还未写内容哦，双击此区域或点击下方按钮开始编写">
               <el-button type="primary" @click="handleEdit">Start</el-button>
             </el-empty>
           </div>
           <div v-else style="height: calc(100vh - 80px); overflow-y: auto;">
-            <Editor style="height: 100%;" :value="markdown" :plugins="plugins" @change="handleChange" />
+            <Editor style="height: 100%;" :value="markdown || ''" :plugins="plugins" @change="handleChange" />
           </div>
         </div>
       </el-col>

@@ -11,7 +11,7 @@
             </div>
             <div class="meta">
                 <div class="actions">
-                    <el-dropdown trigger="click" :hide-on-click="false" @command="handleEdit">
+                    <el-dropdown trigger="click" :hide-on-click="false" @command="handleEdit"  @click.native="e=>e.stopPropagation()">
                         <span class="el-dropdown-link">
                             <svg width="30" height="30" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-menu" data-v-44a2c0a0=""><g opacity="0.61"><circle cx="5.5" cy="10" r="1.5" fill="#86909C"></circle><circle cx="10" cy="10" r="1.5" fill="#86909C"></circle><circle cx="14.5" cy="10" r="1.5" fill="#86909C"></circle></g></svg>
                         </span>
