@@ -5,40 +5,40 @@
         <!-- 主题栏 -->
         <el-col :span="6">
             <div class="leftContent">
-                <div class="title">
-                    <!-- <i class="el-icon-s-home" style="line-height: 60px;"></i> -->
-                    <h2 style="text-align:center; line-height: 60px; margin: 0;">我的日历记事本</h2>
-                    <i class="el-icon-plus" style="color: crimson;" @click="dialogFormVisible = true"></i>
-                </div>
-                <span class="day">{{selectedDay}}</span>
-                <div>
-                    <div class="block">
-                      <el-timeline v-if="showList[showDay.toLocaleDateString()]?.length">
-                        <el-timeline-item v-for="(form) in showList[showDay.toLocaleDateString()]" :timestamp="(new Date(form.time).toTimeString().slice(0, 8))" placement="top" :key="form.updatedAt">
-                          <el-card body-style="padding: 10px; font-size: 12px; display: flex; justify-content: space-around;">
-                            <div style="width: 200px;font-size: 14px; display: flex;" @click="lookThing(form)">
-                              <el-checkbox @change="handleChangeStastus(form)" @click.native="(e) => e.stopPropagation()" v-model="form.hasDone" style="margin-right: 10px;"/>
-                              <span style="max-width: 140px; display: inline-block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{form.name}}</span>
-                              <el-tag size="mini" :color="degreeColor[form.degree-1].color" effect="dark" style="border-color: transparent; margin-left: 5px;">{{ state[form.degree-1] }}</el-tag>
-                              <!-- <div><span>地点：{{form.address}}</span></div>  -->
-                            </div>
-                            <div class="edit">
-                              <span><i class="el-icon-edit" @click="editedThing(form)"></i></span>
-                              <el-popconfirm
-                                title="确定要删除吗？"
-                                @confirm="deleteThing(form.id)"
-                                style="margin-left: 10px;"
-                              >
-                                <i class="el-icon-delete" slot="reference"></i>
-                              </el-popconfirm>
-                            </div>
-                          </el-card>
-                        </el-timeline-item>
-                      </el-timeline>
-                      <el-empty description="暂无事件" v-else>
-                      </el-empty>
-                    </div>
-                </div>
+              <div class="title">
+                  <!-- <i class="el-icon-s-home" style="line-height: 60px;"></i> -->
+                  <h2 style="text-align:center; line-height: 60px; margin: 0;">我的日历记事本</h2>
+                  <i class="el-icon-plus" style="color: crimson;" @click="dialogFormVisible = true"></i>
+              </div>
+              <span class="day">{{selectedDay}}</span>
+              <div>
+                  <div class="block">
+                    <el-timeline v-if="showList[showDay.toLocaleDateString()]?.length">
+                      <el-timeline-item v-for="(form) in showList[showDay.toLocaleDateString()]" :timestamp="(new Date(form.time).toTimeString().slice(0, 8))" placement="top" :key="form.updatedAt">
+                        <el-card body-style="padding: 10px; font-size: 12px; display: flex; justify-content: space-around;">
+                          <div style="width: 200px;font-size: 14px; display: flex;" @click="lookThing(form)">
+                            <el-checkbox @change="handleChangeStastus(form)" @click.native="(e) => e.stopPropagation()" v-model="form.hasDone" style="margin-right: 10px;"/>
+                            <span style="max-width: 140px; display: inline-block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{form.name}}</span>
+                            <el-tag size="mini" :color="degreeColor[form.degree-1].color" effect="dark" style="border-color: transparent; margin-left: 5px;">{{ state[form.degree-1] }}</el-tag>
+                            <!-- <div><span>地点：{{form.address}}</span></div>  -->
+                          </div>
+                          <div class="edit">
+                            <span><i class="el-icon-edit" @click="editedThing(form)"></i></span>
+                            <el-popconfirm
+                              title="确定要删除吗？"
+                              @confirm="deleteThing(form.id)"
+                              style="margin-left: 10px;"
+                            >
+                              <i class="el-icon-delete" slot="reference"></i>
+                            </el-popconfirm>
+                          </div>
+                        </el-card>
+                      </el-timeline-item>
+                    </el-timeline>
+                    <el-empty description="暂无事件" v-else>
+                    </el-empty>
+                  </div>
+              </div>
             </div>
         </el-col>
         <!-- 间距 -->
@@ -46,28 +46,28 @@
         </el-col>
         <!-- 日历展示 -->
         <el-col :span="15">
-            <div id="calendar" style="height: 100%; position: relative;">
-                <el-calendar v-model="showDay">
-                    <template
-                        slot="dateCell"
-                        slot-scope="{data, date}"
-                    > 
-                        <p :class="data.isSelected ? 'is-selected' : ''" @click="updateDay(date)">
-                            {{ date.getDate() }}
-                        </p>
-                        <div class="items">
-                          <span v-for="(item, i) in showList[date.toLocaleDateString()]" :key="item.time + i" class="item" :style="`backgroundColor: ${degreeColor[item.degree-1].color}`" @click="lookThing(item)"> {{ item.name }} </span>
-                        </div>
-                    </template>
-                </el-calendar>
-                <div style="left: 160px; display: inline-block; position: absolute; top: 28px;">
-                  <span v-for="(item, i) in degreeColor" :key="item.color" style="display: inline-flex; align-items: center; font-size: 14px; margin-right: 20px; cursor: pointer;" @click="handleColorSelect(item, i)">
-                    <span :style="`display: inline-block; width: 28px; height: 14px; border-radius: 3px; margin-right: 5px;background-color: ${item.show ? item.color : '#ccc'};`" />
-                    {{ state[i] }}
-                  </span>
-                </div>
-            </div>
-        </el-col>   
+          <div id="calendar" style="height: 100%; position: relative;">
+              <el-calendar v-model="showDay">
+                  <template
+                      slot="dateCell"
+                      slot-scope="{data, date}"
+                  > 
+                      <p :class="data.isSelected ? 'is-selected' : ''" @click="updateDay(date)">
+                          {{ date.getDate() }}
+                      </p>
+                      <div class="items">
+                        <span v-for="(item, i) in showList[date.toLocaleDateString()]" :key="item.time + i" class="item" :style="`backgroundColor: ${degreeColor[item.degree-1].color}`" @click="lookThing(item)"> {{ item.name }} </span>
+                      </div>
+                  </template>
+              </el-calendar>
+              <div style="left: 160px; display: inline-block; position: absolute; top: 28px;">
+                <span v-for="(item, i) in degreeColor" :key="item.color" style="display: inline-flex; align-items: center; font-size: 14px; margin-right: 20px; cursor: pointer;" @click="handleColorSelect(item, i)">
+                  <span :style="`display: inline-block; width: 28px; height: 14px; border-radius: 3px; margin-right: 5px;background-color: ${item.show ? item.color : '#ccc'};`" />
+                  {{ state[i] }}
+                </span>
+              </div>
+          </div>
+        </el-col>
     </el-row>
     <!-- 添加弹窗 -->
     <el-dialog title="添加事件" :visible.sync="dialogFormVisible">
