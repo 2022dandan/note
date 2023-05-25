@@ -35,13 +35,14 @@ const router = new VueRouter({
 
 // 前置路由守卫，每次访问时检测是否已经登录，如果没有则强制跳转登录界面
 router.beforeEach((to, from, next) => {
-    console.log('form', from, to)
+    console.log('from', from, to)
     const toPath = to.path
     if (toPath === '/login') {
         next()
     } else {
         // 用户权限校验
         const token = localStorage.getItem('userToken')
+        console.log(token)
         if (token) {
             next()
         } else {

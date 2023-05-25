@@ -3,7 +3,7 @@
         <el-aside width="auto">
             <Aside @getModel="attendModel" :update="updateAvatar"></Aside><!-- 父子间组件通信 -->
         </el-aside>
-        <el-main style="padding: 0 20px; background: rgba(0, 0, 0, .02);">
+        <el-main style="padding: 0; background: rgba(0, 0, 0, .02);">
             <Note v-if="model === 1"></Note>
             <Calendar v-if="model === 2"></Calendar>
             <Diary v-if="model === 3"></Diary>

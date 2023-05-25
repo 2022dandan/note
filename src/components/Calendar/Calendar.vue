@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 100%;">
+  <div style="height: 100%;" class="background">
     <!-- 页面构建 -->
     <el-row class="calendar" type="flex" justify="center" style="height: 100%; overflow: hidden; padding: 40px 0; box-sizing: border-box;" >
         <!-- 主题栏 -->
@@ -14,8 +14,8 @@
                 <div>
                     <div class="block">
                       <el-timeline v-if="showList[showDay.toLocaleDateString()]?.length">
-                        <el-timeline-item v-for="(form) in showList[showDay.toLocaleDateString()]" :timestamp="(new Date(form.time).toTimeString().slice(0, 8))" placement="top" :key="form.updatedAt">
-                          <el-card body-style="padding: 10px; font-size: 12px; display: flex; justify-content: space-around;">
+                        <el-timeline-item color="#ecf5ff" v-for="(form) in showList[showDay.toLocaleDateString()]" :timestamp="(new Date(form.time).toTimeString().slice(0, 8))" placement="top" :key="form.updatedAt">
+                          <el-card style="background-color: rgba(255, 255, 255, .4);" body-style="padding: 10px; font-size: 12px; display: flex; justify-content: space-around;">
                             <div style="width: 200px;font-size: 14px; display: flex;" @click="lookThing(form)">
                               <el-checkbox @change="handleChangeStastus(form)" @click.native="(e) => e.stopPropagation()" v-model="form.hasDone" style="margin-right: 10px;"/>
                               <span style="max-width: 140px; display: inline-block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{form.name}}</span>
@@ -327,14 +327,24 @@ import { request } from '../../utils'
       },
     }
 </script>
-<style >
+<style>
+    .background {
+      background-image: url('~@/assets/7.jpg');
+      background-size: 100% 100%;
+    }
+
+    .el-timeline-item__tail {
+      border-left: 2px solid #ecf5ff;
+    }
+
     .calendar .leftContent {
       /* height: calc(100% - 25px);;
       margin-top: 25px; */
       height: 100%;
       border-radius: 10px;
-      border: 2px solid #ddd;
-      background-color: #fff;
+      /* border: 2px solid #ddd;
+      background-color: #fff; */
+      background-color: rgba(0, 0, 0, .1);
     }
     .calendar .title {
       display: flex;
@@ -380,11 +390,20 @@ import { request } from '../../utils'
     .calendar .is-selected {
       color: #1989FA;
     }
+
+    .el-calendar-table td.is-selected {
+      background-color: #f5d3d7;
+    }
+
+    .calendar .el-calendar__body td:hover,
+    .el-calendar-table .el-calendar-day:hover {
+      background-color: #f5d3d7;
+    }
     .calendar .el-calendar{
       margin: 0 auto;
       border-radius: 10px;
       border: 2px solid #ddd;
-      background-color: #fff;
+      background-color: rgba(0, 0, 0, .1);
       box-sizing: border-box;
       padding: 10px 0;
       height: 100%;
@@ -396,6 +415,10 @@ import { request } from '../../utils'
       /* margin: 0 0 5px 30px; */
       flex: 1;
       padding-bottom: 0;
+    }
+
+    .calendar .el-calendar__header .el-button-group button {
+      background-color: rgba(0, 0, 0, .1);
     }
 
     .calendar td:hover {

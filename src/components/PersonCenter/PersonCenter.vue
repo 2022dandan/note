@@ -107,13 +107,14 @@
 </script>
 
 <style>
-
 .wrapper {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-image: url('~@/assets/11.jpg');
+  background-size: 100% 100%;
 }
 
 .wrapper .el-form {
