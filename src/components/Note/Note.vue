@@ -2,7 +2,7 @@
   <div  class="background-note">
     <!-- 标题和添加 -->
     <div class="title">
-      <div style="display: flex; margin-left: 50px;width: 400px;" >
+      <div style="display: flex; margin-left: 50px;margin-right: 100px;" >
         <svg v-if="isHome === 1" t="1685038037297" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="37889" width="64" height="64"><path d="M743.0144 910.5408H285.3888c-96.2048 0-174.1824-77.9776-174.1824-174.1824V402.2784c0-37.7856 19.4048-72.9088 51.3536-92.9792l292.1984-183.6544a109.80864 109.80864 0 0 1 116.6848-0.1536l294.1952 183.8592a109.81376 109.81376 0 0 1 51.6096 93.1328v333.8752c-0.0512 96.2048-78.0288 174.1824-174.2336 174.1824z" fill="#FF5D50" p-id="37890"></path><path d="M514.2016 553.0112c-83.5072 0-151.1936 67.6864-151.1936 151.1936v206.3872h302.3872v-206.3872c0-83.5072-67.6864-151.1936-151.1936-151.1936z" fill="#FFDF99" p-id="37891"></path>
         </svg>
         <svg v-else @click="getNoteBookPre" t="1685038484332" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="19036" width="64" height="64"><path d="M478.104276 337.595469V184.66079L114.48369 442.197642l363.620586 257.597261V548.220967c145.529941 0.060409 280.456525 7.405763 394.534756 210.864063 0.001024-129.244021-21.321388-417.874222-394.534756-421.489561z" fill="#98C4D8" p-id="19037"></path><path d="M447.778841 307.270034V154.334331L84.158254 411.871182 447.778841 669.468444V517.894508c145.529941 0.060409 280.456525 7.405763 394.534756 210.864063 0-129.244021-21.322412-417.874222-394.534756-421.488537z" fill="#f4ea2a" p-id="19038" data-spm-anchor-id="a313x.7781069.0.i0" class="selected"></path><path d="M283.00269 350.410162a27.283472 57.977507 55.515 1 0 95.578754-65.652623 27.283472 57.977507 55.515 1 0-95.578754 65.652623Z" fill="#FEFEFE" p-id="19039"></path><path d="M224.416795 445.822358a18.189323 31.830547 55.515 1 0 52.474213-36.044304 18.189323 31.830547 55.515 1 0-52.474213 36.044304Z" fill="#FEFEFE" p-id="19040"></path>
@@ -23,6 +23,19 @@
         <el-tooltip class="item" effect="light" content="添加笔记本" placement="bottom-start">
           <svg @click="showAddNoteBookDialog" t="1684919954386" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="53715" width="48" height="48"><path d="M0 0h1024v1024H0V0z" fill="#202425" opacity=".01" p-id="53716"></path><path d="M136.533333 256H102.4a51.2 51.2 0 1 1 0-102.4h35.157333A136.533333 136.533333 0 0 1 273.066667 34.133333h273.066666a136.533333 136.533333 0 0 1 136.533334 136.533334v682.666666a136.533333 136.533333 0 0 1-136.533334 136.533334H273.066667a136.533333 136.533333 0 0 1-135.4752-119.466667H102.4a51.2 51.2 0 0 1 0-102.4h34.133333v-102.4H102.4a51.2 51.2 0 0 1 0-102.4h34.133333v-102.4H102.4a51.2 51.2 0 0 1 0-102.4h34.133333v-102.4z" fill="#FFAA44" p-id="53717"></path><path d="M273.066667 34.133333h546.133333a136.533333 136.533333 0 0 1 136.533333 136.533334v682.666666a136.533333 136.533333 0 0 1-136.533333 136.533334H273.066667V34.133333z" fill="#FF7744" p-id="53718"></path><path d="M392.533333 307.2A51.2 51.2 0 0 1 443.733333 256h341.333334a51.2 51.2 0 0 1 0 102.4H443.733333A51.2 51.2 0 0 1 392.533333 307.2z m0 204.8a51.2 51.2 0 0 1 51.2-51.2h341.333334a51.2 51.2 0 0 1 0 102.4H443.733333a51.2 51.2 0 0 1-51.2-51.2z m0 204.8a51.2 51.2 0 0 1 51.2-51.2h170.666667a51.2 51.2 0 0 1 0 102.4h-170.666667a51.2 51.2 0 0 1-51.2-51.2z" fill="#FFFFFF" p-id="53719"></path>
           </svg>
+        </el-tooltip>
+        <el-tooltip class="item" effect="light" content="筛选" placement="bottom-start">
+          <el-popover
+            placement="right-start"
+            trigger="click"
+          >
+            <el-checkbox-group style="display: flex; flex-direction: column;" v-model="checkedTags" @change="handleCheckedTagsChange">
+              <el-checkbox v-for="tag in tags" :label="tag" :key="tag">{{tag}}</el-checkbox>
+            </el-checkbox-group>
+            <svg slot="reference" t="1685253444058" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10166" width="48" height="48"><path d="M513.024 514.8672m-424.2944 0a424.2944 424.2944 0 1 0 848.5888 0 424.2944 424.2944 0 1 0-848.5888 0Z" fill="#FF5D50" p-id="10167"></path><path d="M697.7536 283.0848H294.9632c-37.9904 0-56.832 46.0288-29.8496 72.704L402.2272 491.008v213.8112a33.9456 33.9456 0 0 0 16.4352 29.0816l102.0416 61.4912c22.6304 13.6192 51.5072-2.6624 51.5072-29.0816V496.128l154.0096-139.1104c28.8768-26.0096 10.4448-73.9328-28.4672-73.9328z" fill="#FFDF99" p-id="10168"></path><path d="M712.1408 568.832h-77.1072c-16.9472 0-30.72-13.7728-30.72-30.72s13.7728-30.72 30.72-30.72h77.1072c16.9472 0 30.72 13.7728 30.72 30.72s-13.7728 30.72-30.72 30.72zM712.1408 663.6544h-77.1072c-16.9472 0-30.72-13.7728-30.72-30.72s13.7728-30.72 30.72-30.72h77.1072c16.9472 0 30.72 13.7728 30.72 30.72s-13.7728 30.72-30.72 30.72zM712.1408 758.4256h-77.1072c-16.9472 0-30.72-13.7728-30.72-30.72s13.7728-30.72 30.72-30.72h77.1072c16.9472 0 30.72 13.7728 30.72 30.72s-13.7728 30.72-30.72 30.72z" fill="#FFDF99" p-id="10169"></path>
+            </svg>
+          </el-popover>
+          
         </el-tooltip>
       </div>
       <div class="search">
@@ -302,12 +315,20 @@
         addCardDialogVisible: false,
         addNoteDialogVisible: false,
         addNoteBookDialogVisible: false,
+
+        checkedTags: []
       }
     },
     mounted(){
       this.currentform = JSON.parse(sessionStorage.getItem('rootNoteBook'))
       console.log(this.currentform,'curr') 
       this.getAll()
+    },
+    computed: {
+      tags() {
+        const tags = new Set([].concat(...this.originNoteForm.map(item => item.note_type), ...this.originCardForm.map(item => item.card_type), ...this.originNoteBookForm.map(item => item.noteBook_type)))
+        return tags
+      }
     },
     methods: {
       // 点击文件，下一步
@@ -327,6 +348,7 @@
       },
       // 搜索
       searchInfo(v) {
+        console.log('search', v)
         this.cardForm = this.originCardForm.filter(item => {
           return item.card_name.includes(v) || item.card_content.includes(v)
         })
@@ -666,11 +688,28 @@
         }
 
       },
+      handleCheckedTagsChange(value) {
+        if (!value.length) {
+          this.searchInfo(this.input)
+          return
+        }
+        this.cardForm = this.cardForm.filter(item => {
+          return item.card_type.find(tag => value.includes(tag))
+        })
+
+        this.noteForm = this.noteForm.filter(item => {
+          return item.note_type.find(tag => value.includes(tag))
+        })
+
+        this.noteBookForm = this.noteBookForm.filter(item => {
+          return item.noteBook_type.find(tag => value.includes(tag))
+        })
+      }
     }
   }
 </script>
 
-<style scoped>
+<style>
 .background-note {
     height: 100vh;
     background-image: url('~@/assets/3.jpg');
@@ -700,14 +739,19 @@
     vertical-align: bottom;
   }
   .title div .item:first-child {
-    margin-left: 150px;
+    margin-left: 50px;
   }
   .item {
     margin-left: 80px;
   }
   .search {
     width: 300px;
-    margin-left: 300px;
+    margin-left: 200px;
+  }
+
+  .el-popover {
+    width: auto;
+    min-width: auto;
   }
 </style>
 

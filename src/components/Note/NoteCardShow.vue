@@ -6,7 +6,9 @@
           <div style="margin: 5px 0 0 15px"><span style="font-weight:bolder;font-size: larger;">卡片主题：</span><span>{{originForm.card_name}}</span> </div>
           <div style="margin: 5px 0 0 15px"><span style="font-weight:bolder;font-size: larger;">卡片时间：</span><span>{{originForm.card_time}}</span></div>
           <div style="margin: 5px 0 0 15px"><span style="font-weight:bolder;font-size: larger;">卡片详情：</span>
-            <span style="word-wrap:break-word;     width: 166px;
+            <span style="
+                word-wrap:break-word;
+                width: calc(100% - 100px);
                 overflow-wrap: break-word;
                 overflow: hidden;
                 text-overflow: ellipsis;
