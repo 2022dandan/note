@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="background">
         <div class="container">
           <div class="welcome">
             <div ref="pinkbox" class="pinkbox">
@@ -31,17 +31,24 @@
               </div>
             </div>
             <div class="leftbox">
-              <h2 class="title"><span>BLOOM</span>&<br>BOUQUET</h2>
+              <!-- <h2 class="title"><span>BLOOM</span>&<br>BOUQUET</h2>
               <p class="desc">Pick your perfect <span>bouquet</span></p>
               <img class="flower smaller" src="https://hbimg.huabanimg.com/c09305167a883e60179a45374df73252304001359acca-W3qbYm_fw658/format/webp" />
-              <p class="account">Have an account?</p>
+              <p class="account">Have an account?</p> -->
+              <div class="book" style="display: inline-block;     margin-left: 60px; margin-top: 81px;">
+                <svg t="1685082208120" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="9056" width="200" height="200"><path d="M81.92 174.08a81.92 81.92 0 0 0-81.92 81.92v563.2a81.92 81.92 0 0 0 81.92 81.92h274.87232a225.28 225.28 0 0 1 136.8576 46.336c5.29408 4.0448 11.69408 6.4512 18.35008 6.4512 6.656 0 13.056-2.4064 18.35008-6.4512A225.28 225.28 0 0 1 667.20768 901.12H942.08a81.92 81.92 0 0 0 81.92-81.92V256a81.92 81.92 0 0 0-81.92-81.92H667.20768a225.28 225.28 0 0 0-144.896 52.77696L512 235.52l-10.31168-8.66304A225.28 225.28 0 0 0 356.79232 174.08H81.92z" fill="#08979C" p-id="9057"></path><path d="M81.92 102.4a81.92 81.92 0 0 0-81.92 81.92v563.2a81.92 81.92 0 0 0 81.92 81.92h274.87232a225.28 225.28 0 0 1 136.8576 46.336c5.29408 4.0448 11.69408 6.4512 18.35008 6.4512 6.656 0 13.056-2.4064 18.35008-6.4512A225.28 225.28 0 0 1 667.20768 829.44H942.08a81.92 81.92 0 0 0 81.92-81.92V184.32a81.92 81.92 0 0 0-81.92-81.92H667.20768a225.28 225.28 0 0 0-144.896 52.7872L512 163.84l-10.31168-8.6528A225.28 225.28 0 0 0 356.79232 102.4H81.92z" fill="#36CFC9" p-id="9058"></path><path d="M665.6 286.72a30.72 30.72 0 0 1 30.72-30.72h204.8a30.72 30.72 0 1 1 0 61.44H696.32a30.72 30.72 0 0 1-30.72-30.72zM665.6 471.04a30.72 30.72 0 0 1 30.72-30.72h204.8a30.72 30.72 0 1 1 0 61.44H696.32a30.72 30.72 0 0 1-30.72-30.72zM665.6 655.36a30.72 30.72 0 0 1 30.72-30.72h204.8a30.72 30.72 0 1 1 0 61.44H696.32a30.72 30.72 0 0 1-30.72-30.72zM92.16 256a30.72 30.72 0 0 1 30.72-30.72h204.8a30.72 30.72 0 1 1 0 61.44H122.88a30.72 30.72 0 0 1-30.72-30.72zM92.16 440.32a30.72 30.72 0 0 1 30.72-30.72h204.8a30.72 30.72 0 1 1 0 61.44H122.88a30.72 30.72 0 0 1-30.72-30.72zM92.16 624.64a30.72 30.72 0 0 1 30.72-30.72h204.8a30.72 30.72 0 1 1 0 61.44H122.88a30.72 30.72 0 0 1-30.72-30.72z" fill="#B5F5EC" p-id="9059"></path>
+                </svg>
+              </div>
               <button class="button" id="signin" @click="showSignIn()">Login</button>
             </div>
             <div class="rightbox">
-              <h2 class="title"><span>BLOOM</span>&<br>BOUQUET</h2>
+              <!-- <h2 class="title"><span>BLOOM</span>&<br>BOUQUET</h2>
               <p class="desc">Pick your perfect <span>bouquet</span></p>
               <img class="flower" src="https://hbimg.huabanimg.com/b28be92c8198975a74ad656eba00b352c9b9e589819af-lDXUAS_fw658/format/webp" />
-              <p class="account">Don't have an account?</p>
+              <p class="account">Don't have an account?</p> -->
+              <div class="book" style="display: inline-block;     margin-left: 60px; margin-top: 81px;">
+<svg t="1685082630422" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="11221" width="200" height="200"><path d="M815.264 801.472l-17.728 17.728c-19.68 19.68-45.28 29.536-72.864 29.536h-51.2c-47.264 0-98.464-37.408-98.464-102.4v-49.216c0-39.392 17.728-63.008 27.584-76.8l212.672-216.608c5.92-5.92 11.808-19.68 11.808-27.584V212.672c0-51.2-43.328-94.528-94.528-94.528H228.416c-51.2 0-94.528 47.264-94.528 94.528h-31.52c-35.456 0-63.008 29.536-63.008 64.992s27.584 63.008 63.008 63.008h31.52v128h-31.52c-35.456 0-63.008 27.584-63.008 63.008s27.584 63.008 63.008 63.008h31.52v128h-31.52c-35.456 0-63.008 29.536-63.008 63.008 0 35.456 27.584 63.008 63.008 63.008h31.52c0 63.008 43.328 94.528 94.528 94.528h504.128c51.2 0 94.528-43.328 94.528-94.528V807.36c0-9.856-3.936-11.808-11.808-5.92z m-161.472-445.056a31.104 31.104 0 0 1-31.52 31.52H307.2a31.104 31.104 0 0 1-31.52-31.52v-31.52c0-17.728 13.792-31.52 31.52-31.52h315.072c17.728 0 31.52 13.792 31.52 31.52v31.52zM512 738.464a31.104 31.104 0 0 1-31.52 31.52H307.2a31.104 31.104 0 0 1-31.52-31.52v-31.52c0-17.728 13.792-31.52 31.52-31.52h173.28c17.728 0 31.52 13.792 31.52 31.52v31.52z m47.264-191.008a31.104 31.104 0 0 1-31.52 31.52H307.2a31.104 31.104 0 0 1-31.52-31.52v-31.52c0-17.728 13.792-31.52 31.52-31.52h220.544c17.728 0 31.52 13.792 31.52 31.52v31.52zM974.784 460.8l-19.68-19.68a30.912 30.912 0 0 0-43.328 0l-240.256 248.128c-1.984 0-1.984 3.936-1.984 3.936v53.184c0 3.936 0 7.872 3.936 7.872h51.2c1.984 0 3.936-1.984 5.92-1.984l242.208-244.192c15.744-13.792 15.744-33.472 1.984-47.264z" fill="#d2cc55" p-id="11222"></path></svg>
+              </div>
               <button class="button" id="signup" @click="showSignUp()">Sign Up</button>
             </div>
           </div>
@@ -104,7 +111,11 @@
           console.log('error', e)
         })
         if (res?.code === 0) {
+          console.log( res.result.rootNoteBook,"root")
+          let objStr = JSON.stringify(res.result.rootNoteBook)
+          sessionStorage.setItem('rootNoteBook', [objStr])
           sessionStorage.setItem('username', this.userInfo.user_name)
+          // console.log( JSON.parse(sessionStorage.getItem('rootNoteBook')),'kkkk')
           localStorage.setItem('userToken', res.result.token)
           if (this.isRemember) {
           }
@@ -156,37 +167,11 @@
   }
 </script>
 <style scoped>
-    /* .login {
-        width: 604px;
-        height: 400px;
-        border:  1px black solid;
-        position: absolute;
-        top:0;
-        bottom: 0;
-        left:0;
-        right: 0;
-        margin: auto;
-    }
-    .login1 {
-        width: 300px;
-        height: 400px;
-        border:  1px olive solid;
-        display: inline-block;
-    }
-    .login2 {
-        width: 300px;
-        height: 400px;
-        border:  1px olive solid;
-        display: inline-block;
-    }
-    .cover {
-        width: 300px;
-        height: 400px;
-        border:  1px olive solid;
-        display: inline-block;
-        position: absolute;
-        top
-    } */
+  .background {
+    height: 100vh;
+    background-image: url('~@/assets/10.jpg');
+    background-size: 100% 100%;
+  }
   .container {
     margin: auto;
     width: 650px;
@@ -208,7 +193,7 @@
     position: absolute;
     top: -10%;
     left: 5%;
-    background: #eac7cc;
+    background: #3db1b0;
     width: 320px;
     height: 500px;
     border-radius: 5px;
@@ -353,7 +338,7 @@
   }
 
   input {
-    background: #eac7cc;
+    background: #3db1b0;
     width: 65%;
     color: #ce7d88;
     border: none;

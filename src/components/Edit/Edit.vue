@@ -1,7 +1,11 @@
 <template>
-    <div>
+    <div class="edit">
         <el-container>
-            <el-header>{{form.note_name}}</el-header>
+            <el-header>
+              <span>
+                {{form.note_name}}  
+              </span>
+            </el-header>
             <el-main class="edit-main" style="padding: 0;">
                 <div class="edit-toll">
                   <Toolbar
@@ -86,7 +90,7 @@ export default {
         MENU_CONF: {
           uploadImage: {
             fieldName: 'file',
-            server: 'http://localhost:8000/file/uploadImg',
+            server: 'http://localhost:8000/file/uploadFile',
             // customInsert(res, insertFn) {
             //   // 因为自定义插入导致onSuccess与onFailed回调函数不起作用,自己手动处理
 
@@ -101,7 +105,7 @@ export default {
           },
           uploadVideo: {
             fieldName: 'file',
-            server: 'http://localhost:8000/file/uploadImg',
+            server: 'http://localhost:8000/file/uploadFile',
           }
         }
       },
@@ -148,6 +152,7 @@ export default {
       })
       if (res?.code === 0) {
         console.log(res,'编辑成功')
+        this.$router.go(-1);
       }
       else{
         console.log("编辑失败")
@@ -174,6 +179,7 @@ export default {
         })
         if (res?.code === 0) {
           this.form = res.result
+          this.coverUrl = res.result.note_cover
           console.log(this.form,'编辑信息')
         }
         else{
@@ -194,18 +200,23 @@ export default {
   
 }
 
-
 </script>
 <style src="@wangeditor/editor/dist/css/style.css"></style>
 <style>
+  .edit{
+    background-image: url('~@/assets/14.jpg');
+    background-size: 100% 100%;
+    overflow: auto;
+  }
   .el-header {
-    background-color: #fff;
+    /* background-color: #fff; */
+    font-size: 24px;
     color: #333;
     text-align: center;
     line-height: 60px;
   }
   .el-main.edit-main {
-    background-color: #F6F6F6;
+    /* background-color: #F6F6F6; */
     color: #333;
     text-align: center;
     /* height: 100vh; */

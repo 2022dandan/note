@@ -5,9 +5,10 @@
             <span class="timestamp">{{ new Date(copiedEditDiary.time).toLocaleString().replace(/\//g, '.').slice(0, -3) }}</span>
             <div class="body">
                 <div class="title-row">
-                    <h1 class="item-title">{{ copiedEditDiary.title }}</h1>
+                    <h1 class="item-title">主题：{{ copiedEditDiary.name }}</h1>
                 </div>
-                <span class="content">{{ copiedEditDiary.content }}</span>
+                <span class="content"> 心情：{{ copiedEditDiary.feel}}</span>
+                <span class="content"> 天气：{{ copiedEditDiary.weather}}</span>
             </div>
             <div class="meta">
                 <div class="actions">

@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 100%;">
+  <div style="height: 100%;" class="background-diary">
     <el-row class="diary" type="flex" justify="center" style="height: 100%; overflow: hidden; padding: 40px 0; box-sizing: border-box; user-select: none;">
       <!-- 界面主题展示 -->
       <el-col :span="6">
@@ -13,17 +13,18 @@
           <div style="display: flex; padding-left: 10px; padding-right: 6px;">
             <div class="search" style="flex: 1; background-color: #f2f3f5;border-radius: 2px; overflow: hidden;">
               <el-input
-                placeholder="搜索日记"
+                placeholder="搜索日记(仅在Card布局下可用)"
                 suffix-icon="el-icon-search"
                 size="mini"
                 v-model="search"
+                @input="handleSearch"
               >
               </el-input>
             </div>
             <el-button style="margin-left: 5px; padding: 0 5px;" @click="dialogFormVisible = true">写日记</el-button>
           </div>
           <div style="flex: 1; overflow: hidden; padding: 10px 0;">
-            <div v-if="layout === 'card'" style="display: flex; flex-direction: column; align-items: center; width: 100%; height: 100%; overflow: auto; padding-right: 30px; padding-left: 10px; padding-bottom: 20px;">
+            <div v-if="layout === 'card'" style="display: flex; flex-direction: column; align-items: center; width: 98%; height: 100%; overflow: auto; padding-right: 30px; padding-left: 10px; padding-bottom: 20px;">
               <div v-for="(form) in diary" :key="form.date" style="margin-top: 20px; width: 100%; cursor: pointer;" @click="handleClickCard(form)" @dblclick="handleEdit">
                 <DiaryCardShow :diaryForm="form" @handleEdit="handleEdit" @getAllDiary="getAllDiary"></DiaryCardShow>
               </div>
@@ -83,6 +84,7 @@
 </template>
 <script>
   import { Editor, Viewer } from '@bytemd/vue'
+  import lodash from 'lodash'
   import Search from '../Search.vue'
   import DiaryCardShow from './DiaryCardShow.vue'
   import { request } from '../../utils'
@@ -98,6 +100,7 @@
         has: [],
         diary:[
         ],
+        originDiary: [],
         // 搜索
         search: '',
         // 日记添加
@@ -114,7 +117,7 @@
         editting: false,
 
         // 布局模式
-        layout: 'tree'
+        layout: 'card'
 
       }
     },
@@ -155,12 +158,25 @@
       },
       defaultCheckedKeys() {
         return new Date().toLocaleDateString()
-      }
+      },
     },
     mounted(){
       this.getAllDiary()
     },
     methods: {
+      handleSearch(v) {
+        console.log(v)
+        this.diary = this.originDiary.filter(item => {
+          return item.title?.includes(v) || item.content?.includes(v)
+        })
+        // 按时间排序
+        this.diary.sort((a, b) => {
+          const aTime = new Date(a.time).getTime()
+          const bTime = new Date(b.time).getTime()
+          return bTime - aTime
+        })
+        console.log(this.diary)
+      },
       judge(date) {
         return this.has.includes(new Date(date).toLocaleDateString().replace(/\//g, '-'))
       },
@@ -170,6 +186,7 @@
       async handleMessage(){
         this.dialogFormVisible = false
         console.log(this.form)
+        this.form.title = this.form.name
         const res = await request('http://localhost:8000/diary/createDiary', 'post', this.form)
         console.log(res)
         this.getAllDiary()
@@ -185,14 +202,15 @@
           item.date = new Date(item.time).toLocaleDateString().replace(/\//g, '-')
           this.has.push(item.date)
         })
+        this.originDiary = lodash.cloneDeep(this.diary)
 
         // 按时间排序
         this.diary.sort((a, b) => {
           const aTime = new Date(a.time).getTime()
           const bTime = new Date(b.time).getTime()
           return bTime - aTime
-
         })
+
         this.markdown = this.diary[0].content || ''
         console.log('tree', this.diaryTreeList)
       },
@@ -221,7 +239,11 @@
   }
 </script>
 <style>
-
+  .background-diary {
+    background-image: url('~@/assets/14.jpg');
+    background-size: 100% 100%;
+    overflow: auto;
+  }
   .diary .leftContent {
     /* height: calc(100% - 25px);;
     margin-top: 25px; */

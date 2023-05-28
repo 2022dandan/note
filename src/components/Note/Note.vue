@@ -1,11 +1,15 @@
 <template>
-  <div  class="background">
+  <div  class="background-note">
     <!-- 标题和添加 -->
     <div class="title">
       <div style="display: flex; margin-left: 50px;width: 400px;" >
-        <svg t="1684920123677" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="59068" width="64" height="64"><path d="M818.176 51.2c-10.24 0-18.432 9.216-18.432 20.48l-2.048 720.896 75.776 79.872c7.168 7.168 18.432 7.168 25.6 0l70.656-73.728c4.096-4.096 6.144-9.216 6.144-14.336L977.92 71.68c0-11.264-8.192-20.48-18.432-20.48H818.176z" fill="#66C1FF" p-id="59069"></path><path d="M966.656 150.528V80.896c0-8.192-6.144-14.336-12.288-14.336H822.272c-7.168 0-12.288 6.144-12.288 14.336v69.632h156.672z" fill="#FFE08A" p-id="59070"></path><path d="M982.016 165.888l-188.416-1.024V79.872c0-16.384 12.288-29.696 27.648-29.696h132.096c16.384 1.024 29.696 14.336 29.696 30.72l-1.024 84.992z m-157.696-31.744h126.976L952.32 81.92H825.344l-1.024 52.224z" fill="#330867" p-id="59071"></path><path d="M830.464 81.92h116.736l-2.048 698.368-58.368 60.416-58.368-60.416 2.048-698.368m-18.432-30.72c-6.144 0-12.288 6.144-12.288 13.312l-2.048 728.064 80.896 83.968c2.048 2.048 5.12 4.096 8.192 4.096 3.072 0 6.144-1.024 8.192-4.096l76.8-79.872c2.048-2.048 4.096-6.144 4.096-9.216l2.048-721.92c0-7.168-5.12-13.312-12.288-13.312l-153.6-1.024z" fill="#330867" p-id="59072"></path><path d="M893.952 910.336l67.584-112.64c4.096-6.144-1.024-14.336-8.192-14.336H819.2c-7.168 0-12.288 8.192-8.192 14.336l66.56 112.64c4.096 6.144 13.312 6.144 16.384 0z" fill="#FC6B79" p-id="59073"></path><path d="M885.76 930.816c-9.216 0-17.408-5.12-21.504-12.288l-66.56-112.64c-4.096-8.192-5.12-17.408 0-25.6 4.096-8.192 12.288-12.288 21.504-12.288h134.144c9.216 0 17.408 5.12 21.504 12.288 4.096 8.192 4.096 17.408 0 25.6l-67.584 112.64c-4.096 7.168-12.288 12.288-21.504 12.288z m-56.32-133.12l56.32 96.256 57.344-95.232-113.664-1.024z" fill="#330867" p-id="59074"></path><path d="M686.08 848.896H112.64c-33.792 0-61.44-27.648-61.44-61.44v-665.6c0-33.792 27.648-61.44 61.44-61.44h573.44c33.792 0 61.44 27.648 61.44 61.44v665.6c0 33.792-27.648 61.44-61.44 61.44z" fill="#FC6B79" p-id="59075"></path><path d="M686.08 864.256H112.64c-41.984 0-76.8-34.816-76.8-76.8v-665.6c0-41.984 34.816-76.8 76.8-76.8h573.44c41.984 0 76.8 34.816 76.8 76.8v665.6c0 41.984-34.816 76.8-76.8 76.8zM112.64 74.752c-25.6 0-46.08 20.48-46.08 46.08v665.6c0 25.6 20.48 46.08 46.08 46.08h573.44c25.6 0 46.08-20.48 46.08-46.08v-665.6c0-25.6-20.48-46.08-46.08-46.08H112.64z" fill="#330867" p-id="59076"></path><path d="M744.448 788.48H96.256c-24.576 0-44.032 19.456-44.032 44.032v44.032C52.224 902.144 71.68 921.6 96.256 921.6h650.24" fill="#DD365E" p-id="59077"></path><path d="M746.496 936.96H96.256c-32.768 0-59.392-26.624-59.392-59.392v-44.032c0-32.768 26.624-59.392 59.392-59.392h648.192v30.72H96.256c-16.384 0-28.672 13.312-28.672 28.672v44.032c0 16.384 13.312 28.672 28.672 28.672h650.24v30.72z" fill="#330867" p-id="59078"></path><path d="M156.672 65.536h142.336V194.56l-59.392-54.272c-3.072-3.072-7.168-5.12-12.288-5.12-4.096 0-9.216 2.048-12.288 5.12L156.672 194.56V65.536z" fill="#99CAFF" p-id="59079"></path><path d="M288.768 75.776v96.256L246.784 133.12c-5.12-5.12-12.288-7.168-18.432-7.168s-13.312 3.072-18.432 7.168l-41.984 37.888V75.776h120.832m13.312-20.48H154.624c-4.096 0-7.168 3.072-7.168 7.168v138.24c0 4.096 4.096 7.168 7.168 7.168 2.048 0 3.072-1.024 5.12-2.048l63.488-57.344c1.024-1.024 3.072-2.048 5.12-2.048s4.096 1.024 5.12 2.048l63.488 57.344c1.024 1.024 3.072 2.048 5.12 2.048 4.096 0 7.168-3.072 7.168-7.168V62.464c0-4.096-3.072-7.168-7.168-7.168z" fill="#330867" p-id="59080"></path><path d="M279.198018 566.440809a166.912 166.912 0 1 0 236.045094-236.053334 166.912 166.912 0 1 0-236.045094 236.053334Z" fill="#FFE08A" p-id="59081"></path><path d="M397.312 630.784c-100.352 0-182.272-81.92-182.272-182.272S296.96 266.24 397.312 266.24s182.272 81.92 182.272 182.272-81.92 182.272-182.272 182.272z m0-333.824C313.344 296.96 245.76 365.568 245.76 448.512s67.584 151.552 151.552 151.552S548.864 532.48 548.864 448.512 480.256 296.96 397.312 296.96z" fill="#330867" p-id="59082"></path><path d="M412.672 364.544L430.08 399.36c2.048 5.12 7.168 8.192 12.288 9.216l37.888 5.12c14.336 2.048 19.456 19.456 9.216 28.672l-27.648 26.624c-4.096 4.096-6.144 9.216-5.12 15.36l6.144 37.888c2.048 14.336-12.288 24.576-24.576 17.408L405.504 522.24c-5.12-3.072-11.264-3.072-15.36 0l-33.792 17.408c-12.288 6.144-26.624-4.096-24.576-17.408l6.144-37.888c1.024-5.12-1.024-11.264-5.12-15.36l-27.648-26.624c-10.24-10.24-4.096-26.624 9.216-28.672l37.888-5.12c5.12-1.024 10.24-4.096 12.288-9.216l17.408-34.816c6.144-12.288 24.576-12.288 30.72 0z" fill="#9555B5" p-id="59083"></path><path d="M347.136 557.056c-7.168 0-13.312-2.048-19.456-6.144-10.24-7.168-15.36-19.456-13.312-31.744l6.144-37.888v-1.024l-27.648-26.624c-9.216-8.192-12.288-21.504-8.192-32.768 4.096-12.288 13.312-20.48 25.6-21.504l37.888-5.12s1.024 0 1.024-1.024l17.408-34.816a31.50848 31.50848 0 0 1 57.344 0l17.408 34.816 1.024 1.024 37.888 5.12c12.288 2.048 22.528 10.24 25.6 21.504s1.024 24.576-8.192 32.768l-27.648 26.624s-1.024 1.024 0 1.024l6.144 37.888c2.048 12.288-3.072 24.576-13.312 31.744-10.24 7.168-23.552 8.192-33.792 2.048l-33.792-17.408h-1.024L360.448 552.96c-3.072 3.072-8.192 4.096-13.312 4.096z m50.176-186.368c-1.024 0-1.024 1.024-1.024 1.024L378.88 405.504c-5.12 9.216-13.312 16.384-24.576 17.408l-37.888 5.12s-1.024 0-1.024 1.024v2.048l27.648 26.624c7.168 7.168 11.264 18.432 9.216 28.672l-6.144 37.888s0 1.024 1.024 2.048 1.024 0 2.048 0l33.792-17.408c9.216-5.12 20.48-5.12 29.696 0l33.792 17.408h2.048c1.024-1.024 1.024-1.024 1.024-2.048l-6.144-37.888c-2.048-10.24 2.048-21.504 9.216-28.672l27.648-26.624s1.024-1.024 0-2.048c0-1.024-1.024-1.024-1.024-1.024l-38.912-5.12c-10.24-1.024-19.456-8.192-24.576-17.408l-17.408-34.816h-1.024z" fill="#330867" p-id="59084"></path>
+        <svg v-if="isHome === 1" t="1685038037297" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="37889" width="64" height="64"><path d="M743.0144 910.5408H285.3888c-96.2048 0-174.1824-77.9776-174.1824-174.1824V402.2784c0-37.7856 19.4048-72.9088 51.3536-92.9792l292.1984-183.6544a109.80864 109.80864 0 0 1 116.6848-0.1536l294.1952 183.8592a109.81376 109.81376 0 0 1 51.6096 93.1328v333.8752c-0.0512 96.2048-78.0288 174.1824-174.2336 174.1824z" fill="#FF5D50" p-id="37890"></path><path d="M514.2016 553.0112c-83.5072 0-151.1936 67.6864-151.1936 151.1936v206.3872h302.3872v-206.3872c0-83.5072-67.6864-151.1936-151.1936-151.1936z" fill="#FFDF99" p-id="37891"></path>
         </svg>
-        <span style="font-size:30px ;padding-left: 10px; padding-top: 12px;">我的笔记本</span> 
+        <svg v-else @click="getNoteBookPre" t="1685038484332" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="19036" width="64" height="64"><path d="M478.104276 337.595469V184.66079L114.48369 442.197642l363.620586 257.597261V548.220967c145.529941 0.060409 280.456525 7.405763 394.534756 210.864063 0.001024-129.244021-21.321388-417.874222-394.534756-421.489561z" fill="#98C4D8" p-id="19037"></path><path d="M447.778841 307.270034V154.334331L84.158254 411.871182 447.778841 669.468444V517.894508c145.529941 0.060409 280.456525 7.405763 394.534756 210.864063 0-129.244021-21.322412-417.874222-394.534756-421.488537z" fill="#f4ea2a" p-id="19038" data-spm-anchor-id="a313x.7781069.0.i0" class="selected"></path><path d="M283.00269 350.410162a27.283472 57.977507 55.515 1 0 95.578754-65.652623 27.283472 57.977507 55.515 1 0-95.578754 65.652623Z" fill="#FEFEFE" p-id="19039"></path><path d="M224.416795 445.822358a18.189323 31.830547 55.515 1 0 52.474213-36.044304 18.189323 31.830547 55.515 1 0-52.474213 36.044304Z" fill="#FEFEFE" p-id="19040"></path>
+        </svg>
+        <!-- <svg t="1684920123677" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="59068" width="64" height="64"><path d="M818.176 51.2c-10.24 0-18.432 9.216-18.432 20.48l-2.048 720.896 75.776 79.872c7.168 7.168 18.432 7.168 25.6 0l70.656-73.728c4.096-4.096 6.144-9.216 6.144-14.336L977.92 71.68c0-11.264-8.192-20.48-18.432-20.48H818.176z" fill="#66C1FF" p-id="59069"></path><path d="M966.656 150.528V80.896c0-8.192-6.144-14.336-12.288-14.336H822.272c-7.168 0-12.288 6.144-12.288 14.336v69.632h156.672z" fill="#FFE08A" p-id="59070"></path><path d="M982.016 165.888l-188.416-1.024V79.872c0-16.384 12.288-29.696 27.648-29.696h132.096c16.384 1.024 29.696 14.336 29.696 30.72l-1.024 84.992z m-157.696-31.744h126.976L952.32 81.92H825.344l-1.024 52.224z" fill="#330867" p-id="59071"></path><path d="M830.464 81.92h116.736l-2.048 698.368-58.368 60.416-58.368-60.416 2.048-698.368m-18.432-30.72c-6.144 0-12.288 6.144-12.288 13.312l-2.048 728.064 80.896 83.968c2.048 2.048 5.12 4.096 8.192 4.096 3.072 0 6.144-1.024 8.192-4.096l76.8-79.872c2.048-2.048 4.096-6.144 4.096-9.216l2.048-721.92c0-7.168-5.12-13.312-12.288-13.312l-153.6-1.024z" fill="#330867" p-id="59072"></path><path d="M893.952 910.336l67.584-112.64c4.096-6.144-1.024-14.336-8.192-14.336H819.2c-7.168 0-12.288 8.192-8.192 14.336l66.56 112.64c4.096 6.144 13.312 6.144 16.384 0z" fill="#FC6B79" p-id="59073"></path><path d="M885.76 930.816c-9.216 0-17.408-5.12-21.504-12.288l-66.56-112.64c-4.096-8.192-5.12-17.408 0-25.6 4.096-8.192 12.288-12.288 21.504-12.288h134.144c9.216 0 17.408 5.12 21.504 12.288 4.096 8.192 4.096 17.408 0 25.6l-67.584 112.64c-4.096 7.168-12.288 12.288-21.504 12.288z m-56.32-133.12l56.32 96.256 57.344-95.232-113.664-1.024z" fill="#330867" p-id="59074"></path><path d="M686.08 848.896H112.64c-33.792 0-61.44-27.648-61.44-61.44v-665.6c0-33.792 27.648-61.44 61.44-61.44h573.44c33.792 0 61.44 27.648 61.44 61.44v665.6c0 33.792-27.648 61.44-61.44 61.44z" fill="#FC6B79" p-id="59075"></path><path d="M686.08 864.256H112.64c-41.984 0-76.8-34.816-76.8-76.8v-665.6c0-41.984 34.816-76.8 76.8-76.8h573.44c41.984 0 76.8 34.816 76.8 76.8v665.6c0 41.984-34.816 76.8-76.8 76.8zM112.64 74.752c-25.6 0-46.08 20.48-46.08 46.08v665.6c0 25.6 20.48 46.08 46.08 46.08h573.44c25.6 0 46.08-20.48 46.08-46.08v-665.6c0-25.6-20.48-46.08-46.08-46.08H112.64z" fill="#330867" p-id="59076"></path><path d="M744.448 788.48H96.256c-24.576 0-44.032 19.456-44.032 44.032v44.032C52.224 902.144 71.68 921.6 96.256 921.6h650.24" fill="#DD365E" p-id="59077"></path><path d="M746.496 936.96H96.256c-32.768 0-59.392-26.624-59.392-59.392v-44.032c0-32.768 26.624-59.392 59.392-59.392h648.192v30.72H96.256c-16.384 0-28.672 13.312-28.672 28.672v44.032c0 16.384 13.312 28.672 28.672 28.672h650.24v30.72z" fill="#330867" p-id="59078"></path><path d="M156.672 65.536h142.336V194.56l-59.392-54.272c-3.072-3.072-7.168-5.12-12.288-5.12-4.096 0-9.216 2.048-12.288 5.12L156.672 194.56V65.536z" fill="#99CAFF" p-id="59079"></path><path d="M288.768 75.776v96.256L246.784 133.12c-5.12-5.12-12.288-7.168-18.432-7.168s-13.312 3.072-18.432 7.168l-41.984 37.888V75.776h120.832m13.312-20.48H154.624c-4.096 0-7.168 3.072-7.168 7.168v138.24c0 4.096 4.096 7.168 7.168 7.168 2.048 0 3.072-1.024 5.12-2.048l63.488-57.344c1.024-1.024 3.072-2.048 5.12-2.048s4.096 1.024 5.12 2.048l63.488 57.344c1.024 1.024 3.072 2.048 5.12 2.048 4.096 0 7.168-3.072 7.168-7.168V62.464c0-4.096-3.072-7.168-7.168-7.168z" fill="#330867" p-id="59080"></path><path d="M279.198018 566.440809a166.912 166.912 0 1 0 236.045094-236.053334 166.912 166.912 0 1 0-236.045094 236.053334Z" fill="#FFE08A" p-id="59081"></path><path d="M397.312 630.784c-100.352 0-182.272-81.92-182.272-182.272S296.96 266.24 397.312 266.24s182.272 81.92 182.272 182.272-81.92 182.272-182.272 182.272z m0-333.824C313.344 296.96 245.76 365.568 245.76 448.512s67.584 151.552 151.552 151.552S548.864 532.48 548.864 448.512 480.256 296.96 397.312 296.96z" fill="#330867" p-id="59082"></path><path d="M412.672 364.544L430.08 399.36c2.048 5.12 7.168 8.192 12.288 9.216l37.888 5.12c14.336 2.048 19.456 19.456 9.216 28.672l-27.648 26.624c-4.096 4.096-6.144 9.216-5.12 15.36l6.144 37.888c2.048 14.336-12.288 24.576-24.576 17.408L405.504 522.24c-5.12-3.072-11.264-3.072-15.36 0l-33.792 17.408c-12.288 6.144-26.624-4.096-24.576-17.408l6.144-37.888c1.024-5.12-1.024-11.264-5.12-15.36l-27.648-26.624c-10.24-10.24-4.096-26.624 9.216-28.672l37.888-5.12c5.12-1.024 10.24-4.096 12.288-9.216l17.408-34.816c6.144-12.288 24.576-12.288 30.72 0z" fill="#9555B5" p-id="59083"></path><path d="M347.136 557.056c-7.168 0-13.312-2.048-19.456-6.144-10.24-7.168-15.36-19.456-13.312-31.744l6.144-37.888v-1.024l-27.648-26.624c-9.216-8.192-12.288-21.504-8.192-32.768 4.096-12.288 13.312-20.48 25.6-21.504l37.888-5.12s1.024 0 1.024-1.024l17.408-34.816a31.50848 31.50848 0 0 1 57.344 0l17.408 34.816 1.024 1.024 37.888 5.12c12.288 2.048 22.528 10.24 25.6 21.504s1.024 24.576-8.192 32.768l-27.648 26.624s-1.024 1.024 0 1.024l6.144 37.888c2.048 12.288-3.072 24.576-13.312 31.744-10.24 7.168-23.552 8.192-33.792 2.048l-33.792-17.408h-1.024L360.448 552.96c-3.072 3.072-8.192 4.096-13.312 4.096z m50.176-186.368c-1.024 0-1.024 1.024-1.024 1.024L378.88 405.504c-5.12 9.216-13.312 16.384-24.576 17.408l-37.888 5.12s-1.024 0-1.024 1.024v2.048l27.648 26.624c7.168 7.168 11.264 18.432 9.216 28.672l-6.144 37.888s0 1.024 1.024 2.048 1.024 0 2.048 0l33.792-17.408c9.216-5.12 20.48-5.12 29.696 0l33.792 17.408h2.048c1.024-1.024 1.024-1.024 1.024-2.048l-6.144-37.888c-2.048-10.24 2.048-21.504 9.216-28.672l27.648-26.624s1.024-1.024 0-2.048c0-1.024-1.024-1.024-1.024-1.024l-38.912-5.12c-10.24-1.024-19.456-8.192-24.576-17.408l-17.408-34.816h-1.024z" fill="#330867" p-id="59084"></path>
+        </svg> -->
+        <span style="font-size:30px ;padding-left: 10px; padding-top: 12px;">{{currentform.noteBook_name}} </span> 
       </div>
       <div style="display: flex;">
         <el-tooltip class="item" effect="light" content="添加卡片" placement="bottom-start">
@@ -21,7 +25,14 @@
           </svg>
         </el-tooltip>
       </div>
-      <Search></Search>  
+      <div class="search">
+        <el-input
+            placeholder="输入内容开始搜索"
+            suffix-icon="el-icon-search"
+            @input="searchInfo"
+            v-model="input">
+        </el-input>
+      </div>  
     </div>
     <el-divider content-position="left"><span style="font-size: 14px; color: rgba(0, 0, 0, 0.55)">卡片展示</span></el-divider>
         <!-- 卡片展示 -->
@@ -35,8 +46,8 @@
       <el-col :span="4" v-for="(form) in noteForm" :key="'note' + form.note_name"  style="margin-top: 20px;">
         <NoteShow :originForm="form" @getAllNote="getAllNote"></NoteShow>
       </el-col>
-      <el-col :span="4" v-for="(form) in noteBookForm" :key="'note-book' + form.noteBook_name"  style="margin-top: 20px;">
-        <NoteBookShow :originForm="form" @getAllNoteBook="getAllNoteBook"></NoteBookShow>
+      <el-col :span="4" v-for="(form) in noteBookForm" :key="'note-book' + form.noteBook_name" style="margin-top: 20px;">
+        <NoteBookShow  :originForm="form" @getAllNoteBook="getAllNoteBook" @changeCurrentform="changeCurrentform"></NoteBookShow>
       </el-col>
     </el-row>
     <!-- 添加记事卡片 -->
@@ -153,21 +164,24 @@
 </template>
 
 <script>
+  import lodash from 'lodash'
   import NoteShow from "./NoteShow.vue"
   import NoteCardShow from "./NoteCardShow.vue"
   import NoteBookShow from "./NoteBookShow.vue"
-  import Search from '../Search.vue'
+  import { request } from '../../utils'
   // import '../../assets/back.png'
   export default {
     name: 'Note',
     components: {
-      NoteShow,NoteCardShow,Search,NoteBookShow
+      NoteShow,NoteCardShow,NoteBookShow
     },
     // props:['username'],
     data() {
       return{
+        isHome: 1,
+        input:'',
         username: sessionStorage.getItem('username'),
-        currentFile: '0',
+        // currentFile: '0',
         //笔记的类别
         noteType: ['一单元','二单元'],
         inputNoteVisible: false,
@@ -246,7 +260,11 @@
           //   time:'2023-5-5'
           // },
         ],
-        currentform:[],
+        // 原始数据
+        originCardForm: [],
+        originNoteForm: [],
+        originNoteBookForm: [],
+        currentform: {},
         formLabelWidth: '120px',
         // 卡片数据
         cardFormInfo: {
@@ -287,16 +305,41 @@
       }
     },
     mounted(){
-      
-      if(sessionStorage.getItem('username')){
-        // this.getRootNoteBook()
-        this.getAllNote()
-        this.getAllCard()
-        this.getAllNoteBook()
-      }
-      
+      this.currentform = JSON.parse(sessionStorage.getItem('rootNoteBook'))
+      console.log(this.currentform,'curr') 
+      this.getAll()
     },
     methods: {
+      // 点击文件，下一步
+      changeCurrentform(form){
+        // console.log("dianjiwenjian")
+        this.currentform = form
+        this.getAll()
+        this.isHome = 0
+      },
+      getAll(){
+        if(sessionStorage.getItem('username')){
+          // this.getRootNoteBook()
+          this.getAllNote()
+          this.getAllCard()
+          this.getAllNoteBook()
+        }
+      },
+      // 搜索
+      searchInfo(v) {
+        this.cardForm = this.originCardForm.filter(item => {
+          return item.card_name.includes(v) || item.card_content.includes(v)
+        })
+
+        this.noteForm = this.originNoteForm.filter(item => {
+          return item.note_name.includes(v)
+        })
+
+        this.noteBookForm = this.originNoteBookForm.filter(item => {
+          return item.noteBook_name.includes(v)
+        })
+
+      },
       // 获取文件信息
       // async getNoteBookInfo() {
       //   const res = await fetch('http://localhost:8000/note/viewnoteBook', {
@@ -326,7 +369,7 @@
       async handleAddCard() {
         // 增加卡片的逻辑
         this.cardFormInfo.user_name = sessionStorage.getItem('username')
-        this.cardFormInfo.card_parent = this.currentFile
+        this.cardFormInfo.card_parent = this.currentform.id
         this.addCardDialogVisible = false
         console.log(this.cardFormInfo, 123)
         const res = await fetch('http://localhost:8000/note/createNoteCard', {
@@ -393,7 +436,7 @@
         // 增加笔记的逻辑
         console.log(sessionStorage.getItem('username'))
         this.noteFormInfo.user_name = sessionStorage.getItem('username')
-        this.noteFormInfo.note_parent = this.currentFile
+        this.noteFormInfo.note_parent = this.currentform.id
         this.addNoteDialogVisible = false
         console.log(this.noteFormInfo, 123)
         const res = await fetch('http://localhost:8000/note/createNote', {
@@ -439,7 +482,7 @@
         console.log(sessionStorage.getItem('username'))
         this.noteBookFormInfo.user_name = sessionStorage.getItem('username')
         this.noteBookFormInfo.noteBook_haveType = JSON.stringify(this.noteBookFormInfo.noteBook_haveType)
-        this.noteBookFormInfo.noteBook_parent = this.currentFile
+        this.noteBookFormInfo.noteBook_parent = this.currentform.id
         this.addNoteBookDialogVisible = false
         console.log(this.noteBookFormInfo, 123)
         const res = await fetch('http://localhost:8000/note/createNoteBook', {
@@ -509,42 +552,30 @@
         this.inputNoteBookVisible = false;
         this.inputNoteBookValue = '';
       },
-      async getRootNoteBook() {
-        // 展示根文件信息文件
-        const info = {}
-        info.noteBook_name = '我的笔记本'
-        info.user_name = sessionStorage.getItem('username')
-        info.noteBook_parent = 0
-        const res = await fetch('http://localhost:8000/note/viewNoteBook', {
-          method: 'post',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(info),
-          mode: 'cors'
-        })
-        .then(res => res.json())
-        .catch(e => {
-          console.log('error', e)
-        })
-        if (res?.code === 0) {
-          console.log('root',res)
-          this.currentFile = res.result.id
-          this.currentform = res.result
-
-          console.log(res.result)
-          this.currentform.noteBook_haveType =  JSON.parse()
+      async getNoteBookPre() {
+        // 上一步
+        if(this.isHome != 1){
+          this.currentform.user_name = this.username
+          const res = await request('http://localhost:8000/note/getPreNoteBook', 'post', this.currentform)
+          if (res?.code === 0) {
+            console.log('fujiedian', res.result)
+            this.currentform = res.result
+            this.getAll()
+            if(res.result.noteBook_parent === 0){
+              this.isHome = 1
+            }
+          }
+          else{
+          console.log("所有父节文件查找失败")
+          }
         }
-        else{
-          console.log("查询根文件失败失败")
-        }
-
+        
       },
       async getAllNote() {
         // 展示所有笔记的逻辑
         const info = {}
         info.user_name = sessionStorage.getItem('username')
-        info.note_parent = this.currentFile
+        info.note_parent = this.currentform.id
         console.log(info, 123)
         const res = await fetch('http://localhost:8000/note/AllNote', {
           method: 'post',
@@ -559,11 +590,12 @@
           console.log('error', e)
         })
         if (res?.code === 0) {
-          this.noteForm = res.result.map(item => {
+          this.originNoteForm = res.result.map(item => {
             item.note_type = JSON.parse(item.note_type)
             return item
           })
-          console.log(this.noteForm)
+          this.noteForm = lodash.cloneDeep(this.originNoteForm)
+          console.log(this.noteForm, 'note列表')
         }
         else{
           console.log("所有笔记查找失败")
@@ -573,7 +605,7 @@
         // 展示所有卡片
         const info = {}
         info.user_name = sessionStorage.getItem('username')
-        info.card_parent = this.currentFile
+        info.card_parent = this.currentform.id
         console.log(info, 123)
         const res = await fetch('http://localhost:8000/note/AllCard', {
           method: 'post',
@@ -588,13 +620,14 @@
           console.log('error', e)
         })
         if (res?.code === 0) {
-          this.cardForm = res.result.map(item => {
+          this.originCardForm = res.result.map(item => {
             item.card_type = JSON.parse(item.card_type)
             return item
           })
-          this.cardForm.forEach(item=>{
+          this.originCardForm.forEach(item=>{
             item.card_time = new Date(item.card_time).toLocaleDateString().replace(/\//g, '-')
           })
+          this.cardForm = lodash.cloneDeep(this.originCardForm)
           console.log(this.cardForm, "卡片列表")
         }
         else{
@@ -606,7 +639,7 @@
         // 展示所有文件
         const info = {}
         info.user_name = sessionStorage.getItem('username')
-        info.noteBook_parent = this.currentFile
+        info.noteBook_parent = this.currentform.id
         console.log(info, 123)
         const res = await fetch('http://localhost:8000/note/AllNoteBook', {
           method: 'post',
@@ -621,11 +654,12 @@
           console.log('error', e)
         })
         if (res?.code === 0) {
-          this.noteBookForm = res.result.map(item => {
+          this.originNoteBookForm = res.result.map(item => {
             item.noteBook_type = JSON.parse(item.noteBook_type)
             return item
           })
-          console.log(this.cardForm, "文件列表")
+          this.noteBookForm = lodash.cloneDeep(this.originNoteBookForm)
+          console.log(this.noteBookForm, "文件列表")
         }
         else{
           console.log("所有文件列表查询失败")
@@ -637,10 +671,11 @@
 </script>
 
 <style scoped>
-  .background {
+.background-note {
     height: 100vh;
     background-image: url('~@/assets/3.jpg');
-    background-size: 100% 100%;
+    background-size: 100% 103vh;
+    overflow: auto;
   }
   .title {
     padding-top: 10px;
@@ -672,7 +707,7 @@
   }
   .search {
     width: 300px;
-    margin-left: 600px;
+    margin-left: 300px;
   }
 </style>
 

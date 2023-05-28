@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper" style="width: 100%; height: 100%;">
-    <div>
+    <div >
       <!-- <p>个人中心</p> -->
       <el-form ref="form" :model="form" label-width="60px">
         <el-form-item  class="avatar">
@@ -113,15 +113,28 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('~@/assets/11.jpg');
+  background-image: url('~@/assets/25.jpg');
   background-size: 100% 100%;
 }
 
 .wrapper .el-form {
-  background: #fff;
+  background: rgba(0,0,0,.1);
+  backdrop-filter: blur(5px);
   padding: 30px 30px 5px;
   border-radius: 5px;
   border: 1px solid #ddd;
+  margin-right: 700px;
+}
+
+.wrapper .el-input__inner {
+  background-color: transparent;
+  border: 0;
+  border-bottom: 1px solid #fff;
+  border-radius: 0;
+}
+
+.el-input.is-disabled .el-input__inner {
+  background-color: transparent;
 }
 
 .wrapper .el-form-item.avatar {

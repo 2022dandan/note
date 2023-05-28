@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 100%;" class="background">
+  <div style="height: 100%;" class="background-cale">
     <!-- 页面构建 -->
     <el-row class="calendar" type="flex" justify="center" style="height: 100%; overflow: hidden; padding: 40px 0; box-sizing: border-box;" >
         <!-- 主题栏 -->
@@ -328,9 +328,10 @@ import { request } from '../../utils'
     }
 </script>
 <style>
-    .background {
+    .background-cale {
       background-image: url('~@/assets/7.jpg');
-      background-size: 100% 100%;
+      background-size: 100% auto;
+      background-position: 0 -300px;
     }
 
     .el-timeline-item__tail {
